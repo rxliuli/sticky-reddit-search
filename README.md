@@ -1,59 +1,36 @@
-# Browser Extension Template
+# Sticky Reddit Search
 
-A modern browser extension development template built with React, Shadcn/ui, and WXT. Supports building cross-browser extensions compatible with Chrome, Edge, Firefox, and Safari (requires macOS).
+A browser extension that keeps your Reddit search filters (sort, time range, type) when searching with new keywords.
 
-## Getting Started
+## Problem
 
-### Initialize Project
+Reddit resets all search options every time you enter a new search term. This extension preserves your filter preferences automatically.
 
-```sh
-git clone https://github.com/<your-github-username>/<your-project-name>.git
-cd <your-project-name>
-pnpm i
-pnpm init-project
-```
+## Features
 
-Follow the prompts to enter your project name and complete the initialization.
+- ✅ Preserves sort order (relevance, hot, top, new, comments)
+- ✅ Preserves time range filter (hour, day, week, month, year, all time)
+- ✅ Preserves search type (posts, comments, communities, people)
+- ✅ Works in both subreddit and site-wide search
+- ✅ Lightweight and fast
 
-## Development
+## Installation
 
-Chrome is used as the baseline version for development. Edge, Firefox, and Safari builds are only created when needed for publishing, testing, or debugging platform-specific issues.
+### Chrome/Edge
 
-### Start Development Server
-
-```sh
-pnpm dev
-```
-
-After running the development server:
-1. Navigate to the `*.output/chrome-mv3-dev` directory to find the compiled extension files
-2. Open `chrome://extensions` in Chrome
+1. Download or clone this repository
+2. Open `chrome://extensions/`
 3. Enable "Developer mode"
-4. Drag and drop the output directory to load the extension for debugging
+4. Click "Load unpacked" and select the extension folder
 
-## Build & Package
+### Firefox
 
-### Chrome, Edge, and Firefox
+1. Download or clone this repository
+2. Open `about:debugging#/runtime/this-firefox`
+3. Click "Load Temporary Add-on"
+4. Select the `manifest.json` file
 
-Generate production builds and create zip files for distribution:
+## Usage
 
-```sh
-pnpm zip && pnpm zip:firefox
-```
+Just search on Reddit normally. Your filter settings will automatically persist across searches.
 
-### Safari
-
-Safari extension requires macOS environment and Xcode for building and publishing.
-
-#### Build Steps:
-
-1. Create a `.env.local` file and add your `DEVELOPMENT_TEAM` ID
-2. Run `pnpm build:safari` - this will automatically build and open Xcode
-3. Build the project in Xcode and test in Safari
-4. To publish: In Xcode, select **Product → Archive** to submit to the App Store
-
-## Requirements
-
-- Node.js (latest LTS recommended)
-- pnpm package manager
-- macOS with Xcode (for Safari development only)

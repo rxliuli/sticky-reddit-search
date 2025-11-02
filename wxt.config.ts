@@ -1,10 +1,9 @@
 import { defineConfig, UserManifest } from 'wxt'
-import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  modules: ['@wxt-dev/module-react'],
+  modules: [],
   vite: () => ({
-    plugins: [tailwindcss()] as any,
+    plugins: [] as any,
     resolve: {
       alias: {
         '@': __dirname,
@@ -16,9 +15,8 @@ export default defineConfig({
     const manifest: UserManifest = {
       name: 'Sticky Reddit Search',
       description:
-        'A template for WXT, a WebExtension framework based on Vite and React',
-      permissions: ['storage'],
-      host_permissions: ['<all_urls>'],
+        'Keeps your Reddit search filters (sort, time range, type) when searching with new keywords',
+      permissions: [],
       author: {
         email: 'rxliuli@gmail.com',
       },
