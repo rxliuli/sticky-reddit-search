@@ -1,5 +1,6 @@
 import { observeElement } from '@/lib/observeElement'
 import { debounce } from 'es-toolkit'
+import { querySelectorDeep } from 'query-selector-shadow-dom'
 
 export default defineContentScript({
   matches: ['https://www.reddit.com/**'],
@@ -13,7 +14,7 @@ export default defineContentScript({
         searchInput.addEventListener(
           'keydown',
           (ev) => {
-            console.debug('keydown', ev.key)
+            // console.debug('keydown', ev.key)
             if (ev.key === 'Enter') {
               ev.preventDefault()
               ev.stopPropagation()
@@ -41,7 +42,11 @@ export default defineContentScript({
 
 function performSearch(query: string) {
   const subredditMatch = location.pathname.match(/^\/r\/([^\/]+)/)
-  const baseURL = subredditMatch ? `/r/${subredditMatch[1]}/search` : '/search'
+  const baseURL =
+    subredditMatch &&
+    querySelectorDeep('faceplate-search-input #search-input-chip')
+      ? `/r/${subredditMatch[1]}/search`
+      : '/search'
   const params = new URLSearchParams(location.search)
   const paramsToKeep = ['sort', 't', 'type']
   const keysToDelete = Array.from(params.keys()).filter(
